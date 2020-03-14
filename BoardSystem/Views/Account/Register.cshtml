@@ -1,0 +1,24 @@
+﻿@model BoardSystem.Models.User
+<h2>会員加入</h2>
+
+<form class="form-horizontal" method="post" asp-controller="Account" asp-action="Register">
+    <div class="form-group">
+        <label>ユーザー ID</label>
+        <input type="text" class="form-control" asp-for="UserId"  placeholder="ユーザー ID 入力" />
+        <span class="text-danger" asp-validation-for="UserId"></span>
+    </div>
+    <div class="form-group">
+        <label>ユーザー Pw</label>
+        <input type="password" class="form-control" asp-for="UserPassword" placeholder="ユーザー Pw 入力" />
+        <span class="text-danger" asp-validation-for="UserPassword"></span>
+    </div>
+    <div class="form-group">
+        <label>ユーザー 名前</label>
+        <input type="text" class="form-control" asp-for="UserName" placeholder="ユーザー 名前入力" />
+        <span class="text-danger" asp-validation-for="UserName"></span>
+    </div>
+
+    <div>
+        <button type="submit" class="btn btn-primary">会員登録</button>
+    </div>
+</form>
