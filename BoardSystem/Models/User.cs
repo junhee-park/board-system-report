@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BoardSystem.Models
 {
@@ -14,6 +15,7 @@ namespace BoardSystem.Models
         [Required]
         public string UserName { get; set; }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime UserDate { get; set; }
     }
 }

@@ -8,8 +8,8 @@ using BoardSystem.DataContext;
 namespace BoardSystem.Migrations
 {
     [DbContext(typeof(BoardSystemContext))]
-    [Migration("20200314101417_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20200315111852_secondMigration")]
+    partial class secondMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,13 +19,14 @@ namespace BoardSystem.Migrations
 
             modelBuilder.Entity("BoardSystem.Models.Board", b =>
                 {
-                    b.Property<string>("BoardNum")
+                    b.Property<int>("BoardNum")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("BoardContents")
                         .IsRequired();
 
-                    b.Property<DateTime>("BoardDate");
+                    b.Property<DateTime>("BoardDate")
+                        .ValueGeneratedOnAddOrUpdate();
 
                     b.Property<string>("BoardTitle")
                         .IsRequired();
@@ -47,7 +48,8 @@ namespace BoardSystem.Migrations
                     b.Property<string>("UserId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("UserDate");
+                    b.Property<DateTime>("UserDate")
+                        .ValueGeneratedOnAddOrUpdate();
 
                     b.Property<string>("UserName")
                         .IsRequired();

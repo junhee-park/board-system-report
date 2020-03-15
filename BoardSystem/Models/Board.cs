@@ -7,19 +7,20 @@ namespace BoardSystem.Models
     public class Board
     {
         [Key]
-        public string BoardNum { get; set; }
+        public int BoardNum { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "タイトルを入力してください。")]
         public string BoardTitle { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "内容を入力してください。")]
         public string BoardContents { get; set; }
 
-        [Required]
+        
         public string UserId { get; set; }
 
         public int BoardViews { get; set; }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime BoardDate { get; set; }
 
         [ForeignKey("UserId")]

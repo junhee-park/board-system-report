@@ -1,0 +1,25 @@
+﻿<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>番号</th>
+            <th>題目</th>
+            <th>ユーザー</th>
+            <th>日付</th>
+            <th>アクセス数</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var board in Model)
+        {
+            <tr>
+                <td>@board.BoardNum</td>
+                <td>@board.BoardTitle</td>
+                <td>@board.UserId</td>
+                <td>@board.BoardDate</td>
+                <td>@board.BoardViews</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-warning" asp-controller="Board" asp-action="Add">投稿</a>

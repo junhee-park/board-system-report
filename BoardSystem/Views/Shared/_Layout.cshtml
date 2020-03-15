@@ -1,4 +1,5 @@
 ﻿@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
+@using Microsoft.AspNetCore.Http
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,11 +33,19 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Board" asp-action="Index">掲示板</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a asp-area="" asp-controller="Account" asp-action="Register">会員加入</a></li>
-                    <li><a asp-area="" asp-controller="Account" asp-action="Login">ログイン</a></li>
+                    @if (Context.Session.GetString("USER_LOGIN_KEY") == null)
+                    {
+                        <li><a asp-area="" asp-controller="Account" asp-action="Register">会員加入</a></li>
+                        <li><a asp-area="" asp-controller="Account" asp-action="Login">ログイン</a></li>
+                    }
+                    else
+                    {
+                        <li><a asp-area="" asp-controller="Account" asp-action="Logout">ログアウト</a></li>
+                    }
+
                 </ul>
             </div>
         </div>

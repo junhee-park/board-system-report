@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace BoardSystem.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class secondMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,7 +27,8 @@ namespace BoardSystem.Migrations
                 name: "Boards",
                 columns: table => new
                 {
-                    BoardNum = table.Column<string>(nullable: false),
+                    BoardNum = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     BoardContents = table.Column<string>(nullable: false),
                     BoardDate = table.Column<DateTime>(nullable: false),
                     BoardTitle = table.Column<string>(nullable: false),
