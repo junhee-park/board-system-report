@@ -13,6 +13,8 @@ namespace BoardSystem.DataContext
 
         public DbSet<Board> Boards { get; set; }
 
+        public DbSet<Comment> Comments { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=localhost;Database=BoardSystemDb;User Id=sa;Password=a1234;");

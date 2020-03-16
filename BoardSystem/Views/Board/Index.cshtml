@@ -1,5 +1,8 @@
-﻿<table class="table table-bordered">
-    <thead>
+﻿
+
+    <a class="btn btn-warning " asp-controller="Board" asp-action="Add">投稿</a>
+    <table class="table table-bordered">
+
         <tr>
             <th>番号</th>
             <th>題目</th>
@@ -7,19 +10,57 @@
             <th>日付</th>
             <th>アクセス数</th>
         </tr>
-    </thead>
-    <tbody>
-        @foreach (var board in Model)
-        {
+
+
+
+        @*<tbody>
+            @for(var i =0; i<20; i++)
+            {
+                <tr>
+                    <td>@Model[i].BoardNum</td>
+                    <td><a asp-controller="Board" asp-action="Detail" asp-route-boardNum="@Model[i].BoardNum">@Model[i].BoardTitle</a></td>
+                    <td>@Model[i].UserId</td>
+                    <td>@Model[i].BoardDate</td>
+                    <td>@Model[i].BoardViews</td>
+                </tr>
+            }
+        </tbody>*@
+        @{
+            var a = Model.Count;
+            ViewBag.b = 10;
+            foreach (var board in Model)
+            {
             <tr>
                 <td>@board.BoardNum</td>
-                <td>@board.BoardTitle</td>
+                <td><a asp-controller="Board" asp-action="Detail" asp-route-boardNum="@board.BoardNum">@board.BoardTitle</a></td>
                 <td>@board.UserId</td>
                 <td>@board.BoardDate</td>
                 <td>@board.BoardViews</td>
             </tr>
-        }
-    </tbody>
-</table>
+            }
+            }
+        <script>
 
-<a class="btn btn-warning" asp-controller="Board" asp-action="Add">投稿</a>
+            //var page = 0;
+            //$(window).scroll(function () {
+            //    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+            //        console.log(++page);
+            //        $("body").append('<div class="big-box"><h1>Page ' + page + '</h1></div>');
+
+            //    }
+            //});
+            @*$(window).scroll(function () {
+                if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+                    console.log(++page);
+                    
+                    $("table").append('<tr><td>@Model[ViewBag.b].BoardNum</td><td><a asp-controller="Board" asp-action="Detail" asp-route-boardNum="@Model[ViewBag.b].BoardNum">@Model[ViewBag.b].BoardTitle</a></td><td>@Model[ViewBag.b].UserId</td><td>@Model[ViewBag.b].BoardDate</td><td>@Model[ViewBag.b].BoardViews</td></tr>');
+                   @{ 
+                       ViewBag.b++;
+                   }
+                }
+            });*@
+        </script>
+            
+    </table>
+    
+ 

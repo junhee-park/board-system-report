@@ -1,0 +1,75 @@
+﻿@using Microsoft.AspNetCore.Http
+@model BoardSystem.Models.Board
+
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">題目 - @Model.BoardTitle</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-10">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                題目：@Model.BoardTitle
+            </div>
+            <div class="panel-heading">
+                ユーザー：@Model.UserId
+            </div>
+            <div class="panel-heading">
+                日付：@Model.BoardDate
+            </div>
+            <div class="panel-heading">
+                アクセス数：@Model.BoardViews
+            </div>
+            <div class="panel-body">
+                @Model.BoardContents
+            </div>
+            @if (Context.Session.GetString("USER_LOGIN_KEY").Equals(@Model.UserId) || Context.Session.GetString("USER_LOGIN_KEY").Equals("root"))
+            {
+                <div class="panel-footer">
+                    <a class="btn btn-primary" asp-controller="Board" asp-action="Delete" asp-route-boardNum="@Model.BoardNum">削除</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-10">
+        <form class="form-horizontal" method="post" action="AddComment">
+            <div class="form-group">
+                <table>
+                    <tr><th>
+    <textarea class="form-control" name="CommentContents" id="CommentContents" placeholder="内容入力"></textarea>
+    <span class="text-danger"></span>
+</th>
+                    <th><button type="submit" class="btn btn-primary">コメント入力</button></th></tr>
+                </table>
+                
+                <input type="hidden" name="UserId" value="@Context.Session.GetString("USER_LOGIN_KEY")" />
+                <input type="hidden" name="BoardNum" value="@Model.BoardNum" />
+            </div>
+            <div class="form-group">
+                
+            </div>
+        </form>
+    </div>
+    <table class="table table-bordered">
+        @foreach (var comment in ViewBag.CommentList)
+        {
+        <tr>
+
+            <td>@comment.UserId</td>
+            <td>@comment.CommentContents</td>
+            <td>@comment.CommentDate</td>
+            <td>
+                @if (Context.Session.GetString("USER_LOGIN_KEY").Equals(comment.UserId) || Context.Session.GetString("USER_LOGIN_KEY").Equals("root"))
+                {
+                    <a class="btn btn-primary" asp-controller="Board" asp-action="DeleteComment" asp-route-boardNum="@Model.BoardNum" asp-route-commentNum="@comment.CommentNum">削除</a>
+                }
+            </td>
+        </tr>
+        }
+    </table>
+
+</div>

@@ -29,7 +29,7 @@ namespace BoardSystem.Controllers
                     {
                         
                         HttpContext.Session.SetString("USER_LOGIN_KEY", user.UserId);
-                        return RedirectToAction("LoginSuccess", "Home");
+                        return RedirectToAction("Index", "Home");
                         
                     }
                     

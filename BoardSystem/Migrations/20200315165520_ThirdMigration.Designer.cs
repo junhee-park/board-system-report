@@ -8,9 +8,10 @@ using BoardSystem.DataContext;
 namespace BoardSystem.Migrations
 {
     [DbContext(typeof(BoardSystemContext))]
-    partial class BoardSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20200315165520_ThirdMigration")]
+    partial class ThirdMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
@@ -39,26 +40,6 @@ namespace BoardSystem.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Boards");
-                });
-
-            modelBuilder.Entity("BoardSystem.Models.Comment", b =>
-                {
-                    b.Property<int>("CommentNum")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("BoardNum");
-
-                    b.Property<string>("CommentContents")
-                        .IsRequired();
-
-                    b.Property<DateTime>("CommentDate")
-                        .ValueGeneratedOnAddOrUpdate();
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("CommentNum");
-
-                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("BoardSystem.Models.User", b =>

@@ -8,9 +8,10 @@ using BoardSystem.DataContext;
 namespace BoardSystem.Migrations
 {
     [DbContext(typeof(BoardSystemContext))]
-    partial class BoardSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20200315170013_FourMigration")]
+    partial class FourMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
