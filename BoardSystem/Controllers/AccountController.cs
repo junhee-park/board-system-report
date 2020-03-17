@@ -24,14 +24,22 @@ namespace BoardSystem.Controllers
             {
                 using (var db = new BoardSystemContext())
                 {
-                    var user = db.Users.FirstOrDefault(u => u.UserId.Equals(model.UserId) && u.UserPassword.Equals(model.UserPassword));
-                    if(user != null)
+                    User user;
+                    try
                     {
-                        
-                        HttpContext.Session.SetString("USER_LOGIN_KEY", user.UserId);
-                        return RedirectToAction("Index", "Home");
-                        
+                        user = db.Users.FirstOrDefault(u => u.UserId.Equals(model.UserId) && u.UserPassword.Equals(model.UserPassword));
+                        if (user != null)
+                        {
+                            HttpContext.Session.SetString("USER_LOGIN_KEY", user.UserId);
+                            return RedirectToAction("Index", "Home");
+
+                        }
+                    } catch
+                    {
+                        return RedirectToAction("Error", "Home");
                     }
+                    
+                    
                     
                 }
                 
@@ -59,7 +67,14 @@ namespace BoardSystem.Controllers
                 using (var db = new BoardSystemContext())
                 {
                     db.Users.Add(model);
-                    db.SaveChanges();
+                    try
+                    {
+                        db.SaveChanges();
+                    } catch
+                    {
+                        return RedirectToAction("Error", "Home");
+                    }
+                    
                 }
                 return RedirectToAction("Index", "Home");
             }

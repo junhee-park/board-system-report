@@ -23,7 +23,16 @@ namespace BoardSystem.Controllers
             }
             using (var db = new BoardSystemContext())
             {
-                var list = db.Boards.OrderByDescending(s => s.BoardNum).ToList();
+                List<Board> list;
+                try
+                {
+                    list = db.Boards.OrderByDescending(s => s.BoardNum).ToList();
+                }
+                catch
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+                
                 return View(list);
             }
                 
@@ -37,11 +46,19 @@ namespace BoardSystem.Controllers
             }
             using (var db = new BoardSystemContext())
             {
-                var board = db.Boards.FirstOrDefault(n => n.BoardNum.Equals(boardNum));
-                db.Entry(board).Entity.BoardViews = board.BoardViews + 1;
-                db.SaveChanges();
-                var commentList = db.Comments.ToList().Where(d => d.BoardNum.Equals(boardNum));
-                ViewBag.commentList = commentList;
+                Board board;
+                IEnumerable<Comment> commentList;
+                try
+                {
+                    board = db.Boards.FirstOrDefault(n => n.BoardNum.Equals(boardNum));
+                    db.Entry(board).Entity.BoardViews = board.BoardViews + 1;
+                    db.SaveChanges();
+                    commentList = db.Comments.ToList().Where(d => d.BoardNum.Equals(boardNum));
+                    ViewBag.commentList = commentList;
+                } catch {
+                    return RedirectToAction("Error", "Home");
+                }
+                
                 return View(board);
             }
         }
@@ -68,12 +85,20 @@ namespace BoardSystem.Controllers
             {
                 using (var db = new BoardSystemContext())
                 {
-                    db.Boards.Add(model);
-
-                    if(db.SaveChanges() > 0)
+                    try
                     {
-                        return Redirect("Index");
+                        db.Boards.Add(model);
+
+                        if (db.SaveChanges() > 0)
+                        {
+                            return Redirect("Index");
+                        }
                     }
+                    catch
+                    {
+                        return RedirectToAction("Error", "Home");
+                    }
+                    
                 }
                 ModelState.AddModelError(string.Empty, "投稿できません。");
             }
@@ -98,9 +123,18 @@ namespace BoardSystem.Controllers
             }
             using (var db = new BoardSystemContext())
             {
-                var board = db.Boards.Find(boardNum);
-                db.Boards.Remove(board);
-                db.SaveChanges();
+                Board board;
+                try
+                {
+                    board = db.Boards.Find(boardNum);
+                    db.Boards.Remove(board);
+                    db.SaveChanges();
+                }
+                catch
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+                
                 return Redirect("Index");
             }
         }
@@ -113,9 +147,17 @@ namespace BoardSystem.Controllers
             }
             using (var db = new BoardSystemContext())
             {
-                var comment = db.Comments.Find(commentNum);
-                db.Comments.Remove(comment);
-                db.SaveChanges();
+                Comment comment;
+                try
+                {
+                    comment = db.Comments.Find(commentNum);
+                    db.Comments.Remove(comment);
+                    db.SaveChanges();
+                }
+                catch
+                {
+                    return RedirectToAction("Error", "Home");
+                }
                 return Redirect("Detail?boardNum=" + boardNum);
             }
         }
@@ -139,8 +181,16 @@ namespace BoardSystem.Controllers
             };
             using (var db = new BoardSystemContext())
             {
-                db.Comments.Add(comment);
-                db.SaveChanges();
+                try
+                {
+                    db.Comments.Add(comment);
+                    db.SaveChanges();
+                }
+                catch
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+                
                 return Redirect("Detail?boardNum="+ boardNum);
             }
         }
