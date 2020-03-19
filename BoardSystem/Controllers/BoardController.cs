@@ -7,6 +7,8 @@ using BoardSystem.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -26,7 +28,7 @@ namespace BoardSystem.Controllers
                 List<Board> list;
                 try
                 {
-                    list = db.Boards.OrderByDescending(s => s.BoardNum).ToList();
+                    list = getList(0);
                 }
                 catch
                 {
@@ -36,6 +38,47 @@ namespace BoardSystem.Controllers
                 return View(list);
             }
                 
+        }
+
+        public JsonResult Paging(int page)
+        {
+            List<Board> list = null;
+            list = getList(page);
+           
+            JArray json = new JArray();
+            foreach (Board board in list)
+            {
+                String jori = "{";
+                jori += "\"No\":\"" + board.BoardNum + "\",";
+                jori += "\"Title\":\"" + board.BoardTitle + "\",";
+                jori += "\"User\":\"" + board.UserId + "\",";
+                jori += "\"Date\":\"" + board.BoardDate + "\",";
+                jori += "\"Views\":\"" + board.BoardViews + "\"";
+                jori += "}";
+                JObject jtmp = JObject.Parse(jori);
+                json.Add(jtmp);
+            }
+
+            return new JsonResult(json);
+            
+        }
+
+        private List<Board> getList(int page)
+        {
+            using (var db = new BoardSystemContext())
+            {
+                List<Board> list;
+                if (page == 0)
+                {
+                    list = db.Boards.OrderByDescending(s => s.BoardNum).Take(20).ToList();
+                }
+                else
+                {
+                    list = db.Boards.OrderByDescending(s => s.BoardNum).Skip(20 + (page - 1) * 10).Take(10).ToList();
+                }
+
+                return list;
+            }
         }
 
         public IActionResult Detail(int boardNum)

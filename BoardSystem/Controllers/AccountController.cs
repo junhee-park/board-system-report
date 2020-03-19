@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using BoardSystem.DataContext;
 using BoardSystem.Models;
 using BoardSystem.ViewModel;
@@ -70,8 +71,9 @@ namespace BoardSystem.Controllers
                     try
                     {
                         db.SaveChanges();
-                    } catch
+                    } catch (Exception ex)
                     {
+                        Console.WriteLine(ex);
                         return RedirectToAction("Error", "Home");
                     }
                     

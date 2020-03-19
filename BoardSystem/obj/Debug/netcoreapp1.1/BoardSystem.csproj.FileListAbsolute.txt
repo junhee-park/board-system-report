@@ -9,3 +9,14 @@ C:\Users\hijun\source\repos\BoardSystem\BoardSystem\obj\Debug\netcoreapp1.1\Boar
 C:\Users\hijun\source\repos\BoardSystem\BoardSystem\bin\Debug\netcoreapp1.1\BoardSystem.pdb
 C:\Users\hijun\source\repos\BoardSystem\BoardSystem\obj\Debug\netcoreapp1.1\BoardSystem.dll
 C:\Users\hijun\source\repos\BoardSystem\BoardSystem\obj\Debug\netcoreapp1.1\BoardSystem.pdb
+C:\Users\hijun\source\repos\BoardSystem\board-system-report\BoardSystem\bin\Debug\netcoreapp1.1\BoardSystem.deps.json
+C:\Users\hijun\source\repos\BoardSystem\board-system-report\BoardSystem\bin\Debug\netcoreapp1.1\BoardSystem.runtimeconfig.json
+C:\Users\hijun\source\repos\BoardSystem\board-system-report\BoardSystem\bin\Debug\netcoreapp1.1\BoardSystem.runtimeconfig.dev.json
+C:\Users\hijun\source\repos\BoardSystem\board-system-report\BoardSystem\bin\Debug\netcoreapp1.1\BoardSystem.dll
+C:\Users\hijun\source\repos\BoardSystem\board-system-report\BoardSystem\bin\Debug\netcoreapp1.1\BoardSystem.pdb
+C:\Users\hijun\source\repos\BoardSystem\board-system-report\BoardSystem\obj\Debug\netcoreapp1.1\BoardSystem.csprojAssemblyReference.cache
+C:\Users\hijun\source\repos\BoardSystem\board-system-report\BoardSystem\obj\Debug\netcoreapp1.1\BoardSystem.csproj.CoreCompileInputs.cache
+C:\Users\hijun\source\repos\BoardSystem\board-system-report\BoardSystem\obj\Debug\netcoreapp1.1\BoardSystem.AssemblyInfoInputs.cache
+C:\Users\hijun\source\repos\BoardSystem\board-system-report\BoardSystem\obj\Debug\netcoreapp1.1\BoardSystem.AssemblyInfo.cs
+C:\Users\hijun\source\repos\BoardSystem\board-system-report\BoardSystem\obj\Debug\netcoreapp1.1\BoardSystem.dll
+C:\Users\hijun\source\repos\BoardSystem\board-system-report\BoardSystem\obj\Debug\netcoreapp1.1\BoardSystem.pdb

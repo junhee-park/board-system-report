@@ -10688,11 +10688,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hijun\\source\\repos\\BoardSystem\\BoardSystem\\BoardSystem.csproj",
+      "projectUniqueName": "C:\\Users\\hijun\\source\\repos\\BoardSystem\\board-system-report\\BoardSystem\\BoardSystem.csproj",
       "projectName": "BoardSystem",
-      "projectPath": "C:\\Users\\hijun\\source\\repos\\BoardSystem\\BoardSystem\\BoardSystem.csproj",
+      "projectPath": "C:\\Users\\hijun\\source\\repos\\BoardSystem\\board-system-report\\BoardSystem\\BoardSystem.csproj",
       "packagesPath": "C:\\Users\\hijun\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hijun\\source\\repos\\BoardSystem\\BoardSystem\\obj\\",
+      "outputPath": "C:\\Users\\hijun\\source\\repos\\BoardSystem\\board-system-report\\BoardSystem\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hijun\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -17,7 +17,7 @@ namespace BoardSystem.DataContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=localhost;Database=BoardSystemDb;User Id=sa;Password=a1234;");
+            optionsBuilder.UseSqlServer(@"Server=localhost;Database=BoardSystemDb;Integrated Security=SSPI;");
         }
     }
 }

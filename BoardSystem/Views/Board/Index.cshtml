@@ -1,7 +1,7 @@
 ﻿
 
     <a class="btn btn-warning " asp-controller="Board" asp-action="Add">投稿</a>
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="table">
 
         <tr>
             <th>番号</th>
@@ -11,24 +11,9 @@
             <th>アクセス数</th>
         </tr>
 
+       
 
-
-        @*<tbody>
-            @for(var i =0; i<20; i++)
-            {
-                <tr>
-                    <td>@Model[i].BoardNum</td>
-                    <td><a asp-controller="Board" asp-action="Detail" asp-route-boardNum="@Model[i].BoardNum">@Model[i].BoardTitle</a></td>
-                    <td>@Model[i].UserId</td>
-                    <td>@Model[i].BoardDate</td>
-                    <td>@Model[i].BoardViews</td>
-                </tr>
-            }
-        </tbody>*@
-        @{
-            var a = Model.Count;
-            ViewBag.b = 10;
-            foreach (var board in Model)
+            @foreach (var board in Model)
             {
             <tr>
                 <td>@board.BoardNum</td>
@@ -38,29 +23,45 @@
                 <td>@board.BoardViews</td>
             </tr>
             }
-            }
-        <script>
-
-            //var page = 0;
-            //$(window).scroll(function () {
-            //    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-            //        console.log(++page);
-            //        $("body").append('<div class="big-box"><h1>Page ' + page + '</h1></div>');
-
-            //    }
-            //});
-            @*$(window).scroll(function () {
-                if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-                    console.log(++page);
-                    
-                    $("table").append('<tr><td>@Model[ViewBag.b].BoardNum</td><td><a asp-controller="Board" asp-action="Detail" asp-route-boardNum="@Model[ViewBag.b].BoardNum">@Model[ViewBag.b].BoardTitle</a></td><td>@Model[ViewBag.b].UserId</td><td>@Model[ViewBag.b].BoardDate</td><td>@Model[ViewBag.b].BoardViews</td></tr>');
-                   @{ 
-                       ViewBag.b++;
-                   }
-                }
-            });*@
-        </script>
-            
+       
     </table>
     
- 
+    <script>
+        var page = 0;
+        var work = true;
+        $(window).scroll(function () {
+            if (work && $(window).scrollTop() == $(document).height() - $(window).height()) {
+                console.log(++page);
+                getScrolled(page);
+            }
+        });
+
+        function getScrolled(startNo) {
+            $.ajax({
+            url:"Board/Paging?page=" + startNo ,
+            type: "GET",
+            dataType: "json",
+                success: function (result) {
+                    console.log(result);
+
+                let length = result.length;
+                if( length <= 0 ){
+                    work = false;
+                }
+                    if (work || length > 0) {
+                        console.log("loop");
+                    $.each(result, function (index, item) {
+                        console.log(item);
+                        $("#table").append('<tr>' +
+                            '<td>' + item.No + '</td>' +
+                            '<td><a asp-controller="Board" asp-action="Detail" asp-route-boardNum="' + item.No +'">' + item.Title + '</a></td>' +
+                            '<td>' + item.User + '</td>' +
+                            '<td>' + item.Date + '</td>' +
+                            '<td>' + item.Views + '</td>' +
+                            '</tr>');
+                    });
+                }
+            }
+        });
+        }
+    </script>
